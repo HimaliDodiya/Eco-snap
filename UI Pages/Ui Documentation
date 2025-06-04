@@ -1,1 +1,33 @@
+## Home Screen
+🔘 UI Components:
+Title: “Report Plastic Waste”
 
+Button: “📷 Capture Waste”
+
+Menu (optional): View past submissions / About
+
+ ## Capture Image Screen
+🔘 UI Components:
+Live Camera Preview (via camera plugin).
+
+Button: “Take Photo” or “Upload from Gallery”
+
+Image Preview after captur
+
+##Location + Note Screen
+🔘 UI Components:
+Google Map Preview (uses google_maps_flutter)
+
+Auto-filled address using GPS (via geolocator)
+
+Optional input: Short text note
+
+Button: “Submit Report
+
+##Confirmation / Thank You Screen
+🔘 UI Components:
+Message: “🎉 Thank you for reporting!”
+
+Button: “Share on Social Media” (optional gamification)
+
+Option: “Report another” / Return to Home
