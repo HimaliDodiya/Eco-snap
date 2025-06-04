@@ -50,14 +50,14 @@
 
 ## 🧠 Firestore / Supabase Schema
 
-/reports/
-└── reportID (doc/row)
-├── imageUrl: string
-├── lat: double
-├── lng: double
-├── note: string
-├── timestamp: DateTime
-└── userId: string (optional)
+   /reports/
+   └── reportID (doc/row)
+   ├── imageUrl: string
+   ├── lat: double
+   ├── lng: double
+   ├── note: string
+   ├── timestamp: DateTime
+   └── userId: string (optional)
 
 
 ---
@@ -104,16 +104,3 @@ lib/
 │   └── supabase_service.dart
 └── widgets/
     └── custom_buttons.dart
-
-### 💡 Future Enhancements
-🤖 AI Model to detect and classify plastic type
-
-🪙 Gamification – coins, badges, leaderboard
-
-🌐 Multi-language support
-
-📢 Integration with municipal cleaning alerts
-
-🧩 Open API for NGOs, researchers
-
-
