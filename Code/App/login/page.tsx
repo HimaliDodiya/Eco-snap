@@ -1,0 +1,106 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { useAuth } from "../context/auth-context"
+import { useToast } from "@/components/ui/use-toast"
+
+export default function LoginPage() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const router = useRouter()
+  const { login } = useAuth()
+  const { toast } = useToast()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    try {
+      const success = await login(email, password)
+      if (success) {
+        router.push("/dashboard")
+      } else {
+        toast({
+          title: "Login failed",
+          description: "Please check your credentials and try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col items-center bg-white">
+      <div className="w-full max-w-md px-6 py-12 flex flex-col items-center mt-12">
+        {/* Login Header */}
+        <h1 className="text-6xl font-bold text-black mb-2">Login</h1>
+        <p className="text-xl text-gray-400 mb-2">Hello Welcome Back</p>
+        <p className="text-lg text-gray-400 text-center mb-12">Let's make our Planet Plastic free Together!!</p>
+
+        {/* Login Form */}
+        <form onSubmit={handleLogin} className="w-full space-y-6">
+          <div className="relative">
+            <Input
+              type="email"
+              placeholder="Email id"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="h-14 px-4 rounded-full text-lg"
+            />
+          </div>
+
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="h-14 px-4 rounded-full text-lg pr-12"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
+              {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
+            </button>
+          </div>
+
+          <p className="text-center text-gray-500">
+            I Don't have an Account?{" "}
+            <span className="text-purple-500 font-medium cursor-pointer" onClick={() => router.push("/register")}>
+              Register
+            </span>
+          </p>
+
+          <Button
+            type="submit"
+            className="w-full py-6 text-xl bg-purple-500 hover:bg-purple-600 rounded-full mt-12"
+            disabled={isLoading}
+          >
+            {isLoading ? "Logging in..." : "Login"}
+          </Button>
+        </form>
+      </div>
+    </div>
+  )
+}
